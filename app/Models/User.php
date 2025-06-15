@@ -45,4 +45,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relation : un utilisateur peut avoir plusieurs tâches
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    // Relation : un utilisateur peut avoir plusieurs catégories
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

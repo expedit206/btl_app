@@ -14,6 +14,26 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
+    {
+        title: 'Tasks',
+        href: '/tasks',
+        icon: LayoutGrid, // Change l'icône si tu veux
+    },
+    {
+        title: 'Create Task',
+        href: '/tasks/create',
+        icon: LayoutGrid, // Change l'icône si tu veux
+    },
+    {
+        title: 'Categories',
+        href: '/categories',
+        icon: LayoutGrid, // Change l'icône si tu veux
+    },
+    {
+        title: 'Create Category',
+        href: '/categories/create',
+        icon: LayoutGrid, // Change l'icône si tu veux
+    },
 ];
 
 const footerNavItems: NavItem[] = [
