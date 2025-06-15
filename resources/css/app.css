@@ -10,6 +10,10 @@ html {
 
 @layer base {
     :root {
+        --theme-blue: #2563EB;
+            --theme-white: #FFFFFF;
+            --theme-black: #1F2937;
+            --theme-blue-dark: #1E40AF;
         --background: 0 0% 100%;
         --foreground: 0 0% 3.9%;
         --card: 0 0% 100%;
@@ -89,4 +93,8 @@ html {
     body {
         @apply bg-background text-foreground;
     }
+}
+
+.btn-primary {
+    @apply bg-theme-blue text-theme-white px-4 py-2 rounded hover:bg-theme-blue-dark;
 }

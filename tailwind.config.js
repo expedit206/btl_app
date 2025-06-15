@@ -22,6 +22,10 @@ export default {
             colors: {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
+                'theme-blue': '#2563EB', // Bleu principal
+                'theme-white': '#FFFFFF', // Blanc pour les fonds
+                'theme-black': '#1F2937', // Noir/gris foncé pour le texte
+                'theme-blue-dark': '#1E40AF', // Bleu foncé pour hover
                 card: {
                     DEFAULT: 'hsl(var(--card))',
                     foreground: 'hsl(var(--card-foreground))',
