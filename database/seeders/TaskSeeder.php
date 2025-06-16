@@ -16,6 +16,7 @@ class TaskSeeder extends Seeder
             'title' => 'Tâche de test',
             'description' => 'Ceci est une tâche pour tester le filtre.',
             'date' => now()->toDateString(),
+            'time' => '14:30',
             'status' => false,
         ]);
     }

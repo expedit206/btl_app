@@ -12,7 +12,7 @@ class TaskController extends Controller
     {
         $selectedDate = $request->input('dateFilter', now()->toDateString());
         $tasks = Task::whereDate('date', $selectedDate)->get();
-
+// dd($tasks);
         return Inertia::render('Tasks/Index', [
             'tasks' => $tasks,
             'selectedDate' => $selectedDate,
@@ -30,6 +30,7 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'date' => 'required|date',
+            'time' => 'nullable|date_format:H:i',
         ]);
 
         Task::create($validated);
@@ -39,11 +40,20 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $validated = $request->validate([
-            'status' => 'required|boolean',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'date' => 'required|date',
+            'time' => 'nullable|date_format:H:i',
+            'status' => 'sometimes|boolean',
         ]);
 
         $task->update($validated);
-        return redirect()->route('tasks.index')->with('success', 'Statut mis à jour.');
+        return redirect()->route('tasks.index')->with('success', 'Tâche mise à jour.');
+    }
+
+    public function edit(Task $task)
+    {
+        return Inertia::render('Tasks/Edit', ['task' => $task]);
     }
 
     public function destroy(Task $task)

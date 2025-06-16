@@ -14,7 +14,10 @@ class TaskFactory extends Factory
         return [
             'title' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(),
-            'date' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
+            // 'date' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
+            'date' => now()->toDateString(),
+    
+            'time' => $this->faker->time('H:i'),
             'status' => $this->faker->boolean(),
         ];
     }

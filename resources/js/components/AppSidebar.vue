@@ -14,16 +14,16 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
-    {
-        title: 'schedule',
-        href: '/schedules',
-        icon: LayoutGrid, // Change l'icône si tu veux
-    },
-    {
-        title: 'Add schedule',
-        href: '/schedules/create',
-        icon: LayoutGrid, // Change l'icône si tu veux
-    },
+    // {
+    //     title: 'schedule',
+    //     href: '/schedules',
+    //     icon: LayoutGrid, // Change l'icône si tu veux
+    // },
+    // {
+    //     title: 'Add schedule',
+    //     href: '/schedules/create',
+    //     icon: LayoutGrid, // Change l'icône si tu veux
+    // },
     {
         title: 'Tasks',
         href: '/tasks',
