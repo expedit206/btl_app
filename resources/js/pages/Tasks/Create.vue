@@ -1,36 +1,49 @@
 <template>
     <AppLayout>
-        <div class="container mx-auto p-4">
-            <h2 class="text-2xl text-theme-black mb-4">Create Task</h2>
-            <form @submit.prevent="submit">
-                <div class="mb-4">
-                    <label for="title" class="block text-theme-black">Title</label>
+        <div class="container mx-auto px-6 py-8">
+            <h2 class="text-3xl font-semibold text-theme-black mb-6">Créer une tâche</h2>
+            <form @submit.prevent="submit" class="max-w-lg">
+                <div class="mb-5">
+                    <label for="title" class="block text-theme-black font-medium mb-2">Titre</label>
                     <input v-model="form.title" id="title"
-                        class="border border-theme-black rounded w-full p-2 text-theme-black" />
-                    <div v-if="form.errors.title" class="text-red-600">{{ form.errors.title }}</div>
+                        class="border border-theme-black rounded-lg w-full px-4 py-2 text-theme-black focus:ring-2 focus:ring-theme-blue focus:border-theme-blue transition duration-200" />
+                    <div v-if="form.errors.title" class="text-red-600 text-sm mt-1">{{ form.errors.title }}</div>
                 </div>
-                <div class="mb-4">
-                    <label for="priority" class="block text-theme-black">Priority</label>
-                    <select v-model="form.priority" id="priority"
-                        class="border border-theme-black rounded w-full p-2 text-theme-black">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                    </select>
+                <div class="mb-5">
+                    <label for="description" class="block text-theme-black font-medium mb-2">Description</label>
+                    <textarea v-model="form.description" id="description"
+                        class="border border-theme-black rounded-lg w-full px-4 py-2 text-theme-black focus:ring-2 focus:ring-theme-blue focus:border-theme-blue transition duration-200"
+                        rows="4"></textarea>
+                    <div v-if="form.errors.description" class="text-red-600 text-sm mt-1">{{ form.errors.description }}
+                    </div>
                 </div>
-                <button type="submit" class="btn-primary">Save</button>
+                <div class="mb-5">
+                    <label for="date" class="block text-theme-black font-medium mb-2">Date</label>
+                    <input v-model="form.date" type="date" id="date"
+                        class="border border-theme-black rounded-lg w-full px-4 py-2 text-theme-black focus:ring-2 focus:ring-theme-blue focus:border-theme-blue transition duration-200" />
+                    <div v-if="form.errors.date" class="text-red-600 text-sm mt-1">{{ form.errors.date }}</div>
+                </div>
+                <div class="mb-5">
+                    <label for="time" class="block text-theme-black font-medium mb-2">Heure</label>
+                    <input v-model="form.time" type="time" id="time"
+                        class="border border-theme-black rounded-lg w-full px-4 py-2 text-theme-black focus:ring-2 focus:ring-theme-blue focus:border-theme-blue transition duration-200" />
+                    <div v-if="form.errors.time" class="text-red-600 text-sm mt-1">{{ form.errors.time }}</div>
+                </div>
+                <button type="submit" class="btn-primary">Enregistrer</button>
             </form>
         </div>
     </AppLayout>
 </template>
 
 <script setup>
-import AppLayout from '../Components/AppLayout.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     title: '',
-    priority: 'medium',
+    description: '',
+    date: '',
+    time: '',
 });
 
 function submit() {

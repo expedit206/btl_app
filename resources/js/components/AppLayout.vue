@@ -30,5 +30,5 @@
 </template>
 
 <script setup>
-import { InertiaLink } from '@inertiajs/vue3';
+// import { InertiaLink } from '@inertiajs/vue3';
 </script>
