@@ -52,7 +52,7 @@
                           <button @click="deleteTask(task.id)" class="btn btn-danger text-xs sm:text-sm">Supprimer</button>
                       </div>
                   </div>
-                  <p v-if="!missedTasks.length" class="text-theme-black text-sm italic pl-5">Aucune tâche manquée.</p>
+                  <p v-if="!missedTasks.length" class="text-theme-black text-sm italic pl-5">Aucune tâche manquée.</p>  
               </div>
 
               <!-- Tâches en cours -->
