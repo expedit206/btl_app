@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { useForm } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Mon planing journalier',
@@ -26,6 +28,9 @@ function submit() {
 </script><template>
 
     <AppLayout :breadcrumbs="breadcrumbs">
+
+        <Head title="Creer une tache" />
+
         <div
             class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-8">
             <div class="w-full max-w-lg bg-white rounded-xl shadow-lg border border-gray-200 p-8">
