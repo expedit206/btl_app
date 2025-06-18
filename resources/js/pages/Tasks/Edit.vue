@@ -79,5 +79,5 @@
       form.put(route('tasks.update', props.task.id), {
           onSuccess: () => form.reset(),
       });
-  }
+  } 
   </script>
