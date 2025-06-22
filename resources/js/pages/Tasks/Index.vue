@@ -18,9 +18,9 @@
                       class="border border-theme-black rounded-lg w-full px-3 py-2 text-theme-black text-sm sm:text-base focus:ring-2 focus:ring-theme-blue focus:border-theme-blue transition duration-200"
                   />
               </div>
-
+<!-- {{ missedTasks }} -->
               <!-- Tâches manquées des jours précédents -->
-              <h3 class="text-xl sm:text-2xl font-medium text-theme-black mb-4 flex items-center">
+              <h3  class="text-xl sm:text-2xl font-medium text-theme-black mb-4 flex items-center">
                   <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
@@ -97,7 +97,7 @@
                   </svg>
                   Tâches accomplies
               </h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              <div class="grid grid-cols-1  gap-4 sm:gap-6">
                   <div v-for="task in completedTasks" :key="task.id" class="bg-theme-white border-l-4 border-green-500 rounded-lg p-4 sm:p-5 shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col sm:flex-row items-start justify-between">
                       <div class="flex items-start flex-1 mb-4 sm:mb-0">
                           <div class="flex-shrink-0">
@@ -158,7 +158,9 @@
 
   const missedTasks = computed(() => props.tasks.filter(task => !task.status && task.date < today));
   const pendingTasks = computed(() => props.tasks.filter(task => !task.status && task.date === form.dateFilter));
-  const completedTasks = computed(() => props.tasks.filter(task => task.status && task.date === form.dateFilter));
+const completedTasks = computed(() => props.tasks.filter(task => task.status && task.date === form.dateFilter));
+  console.log(missedTasks);
+  
 
   function filterTasks() {
       form.get(route('tasks.index'), {

@@ -5,52 +5,52 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { Home, List, Plus, ArrowLeftRight, CheckSquare, BookOpen } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Tableau de bord',
         href: '/dashboard',
-        icon: LayoutGrid,
+        icon: Home,
     },
-    // {
-    //     title: 'schedule',
-    //     href: '/schedules',
-    //     icon: LayoutGrid, // Change l'icône si tu veux
-    // },
-    // {
-    //     title: 'Add schedule',
-    //     href: '/schedules/create',
-    //     icon: LayoutGrid, // Change l'icône si tu veux
-    // },
     {
-        title: 'Tasks',
+        title: 'Catégories',
+        href: '/categories',
+        icon: List,
+    },
+    {
+        title: 'Créer une catégorie',
+        href: '/categories/create',
+        icon: Plus,
+    },
+    {
+        title: 'Mouvements',
+        href: '/movements',
+        icon: ArrowLeftRight,
+    },
+    {
+        title: 'Créer un mouvement',
+        href: '/movements/create',
+        icon: Plus,
+    },
+    {
+        title: 'Tâches',
         href: '/tasks',
-        icon: LayoutGrid, // Change l'icône si tu veux
+        icon: CheckSquare,
     },
     {
-        title: 'Create Task',
+        title: 'Créer une tâche',
         href: '/tasks/create',
-        icon: LayoutGrid, // Change l'icône si tu veux
+        icon: Plus,
     },
-    // {
-    //     title: 'Categories',
-    //     href: '/categories',
-    //     icon: LayoutGrid, // Change l'icône si tu veux
-    // },
-    // {
-    //     title: 'Create Category',
-    //     href: '/categories/create',
-    //     icon: LayoutGrid, // Change l'icône si tu veux
-    // },
 ];
 
 const footerNavItems: NavItem[] = [
     // {
-    //     title: 'Github Repo',
+    //     title: 'Dépôt GitHub',
     //     href: 'https://github.com/laravel/vue-starter-kit',
-    //     icon: Folder,
+    //     icon: GitHub,
     // },
     // {
     //     title: 'Documentation',
@@ -67,7 +67,7 @@ const footerNavItems: NavItem[] = [
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
                         <Link :href="route('dashboard')">
-                            <AppLogo />
+                        <AppLogo />
                         </Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>

@@ -1,44 +1,47 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { type BreadcrumbItem } from '@/types';
-import { Head, Link } from '@inertiajs/vue3';
-import CategoryCard from '../../components/PlaceholderPattern.vue'; // Remplace si tu as CategoryCard.vue
+import { Head, useForm } from '@inertiajs/vue3';
+import { BreadcrumbItem } from '@/types';
+
+const form = useForm({
+    name: '',
+    description: '',
+    unit: '',
+});
 
 const breadcrumbs: BreadcrumbItem[] = [
-    { title: 'Categories', href: '/categories' },
+    { title: 'Dashboard', href: '/dashboard' },
+    { title: 'Catégories', href: route('categories.index') },
+    { title: 'Ajouter une catégorie' },
 ];
-
-defineProps<{
-    categories: any[];
-}>();
 </script>
 
 <template>
 
-    <Head title="Categories" />
+    <Head title="Ajouter une catégorie" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex flex-col gap-6 p-6">
-
-            <!-- Titre de la page -->
-            <div class="flex items-center justify-between">
-                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Browse Categories</h1>
-                <Link :href="route('categories.create')"
-                    class="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700 transition duration-200">
-                + Add Category
-                </Link>
-            </div>
-
-            <!-- Liste des catégories -->
-            <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-                <CategoryCard v-for="category in categories" :key="category.id" :category="category" />
-            </div>
-
-            <!-- Si aucune catégorie -->
-            <div v-if="categories.length === 0"
-                class="mt-10 rounded-lg border-2 border-dashed border-gray-300 p-8 text-center text-gray-500 dark:border-gray-600 dark:text-gray-400">
-                No categories available. Add a new one to get started.
-            </div>
+        <div class="p-4">
+            <h1 class="text-2xl font-bold mb-4">Ajouter une catégorie</h1>
+            <form @submit.prevent="form.post(route('categories.store'))" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nom</label>
+                    <input v-model="form.name" type="text"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea v-model="form.description"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Unité</label>
+                    <input v-model="form.unit" type="text"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                </div>
+                <button type="submit"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-800">Enregistrer</button>
+            </form>
         </div>
     </AppLayout>
 </template>

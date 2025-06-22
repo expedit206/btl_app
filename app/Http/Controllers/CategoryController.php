@@ -36,6 +36,9 @@ class CategoryController extends Controller
     {
         return Inertia::render('Categories/Edit', ['category' => $category]);
     }
+    public function show(){
+        
+    }
 
     public function update(Request $request, Category $category)
     {

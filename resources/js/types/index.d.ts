@@ -10,7 +10,25 @@ export interface BreadcrumbItem {
     title: string;
     href: string;
 }
+export interface Movement {
+    id: number;
+    type: 'entry' | 'exit';
+    category_id: number;
+    category: Category;
+    quantity: number;
+    value: number;
+    date: string;
+    description?: string;
+    user_id: number;
+}
 
+export interface Category {
+    id: number;
+    name: string;
+    description?: string;
+    unit: string;
+}
+  
 export interface NavItem {
     title: string;
     href: string;

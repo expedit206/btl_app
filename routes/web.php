@@ -4,7 +4,9 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MovementController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -24,11 +26,11 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 });
-Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
-Route::get('/schedules/create', [ScheduleController::class, 'create'])->name('schedules.create');
-Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
-Route::put('/schedules/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
-Route::delete('     /schedules/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
+    Route::resource('categories', CategoryController::class);
+    Route::resource('movements', MovementController::class);
+});
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
