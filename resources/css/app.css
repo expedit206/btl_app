@@ -1,53 +1,120 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-  :root {
-      --theme-blue: #2563EB;
-      --theme-white: #FFFFFF;
-      --theme-black: #1F2937;
-      --theme-blue-dark: #1E40AF;
-  }
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
-  .btn-primary {
-      @apply bg-theme-blue text-theme-white px-6 py-3 rounded-lg hover:bg-theme-blue-dark focus:ring-2 focus:ring-theme-blue focus:ring-offset-2 transition duration-200 font-medium;
-  }
+:root {
+    --theme-blue: #2563EB;
+    --theme-white: #FFFFFF;
+    --theme-black: #1F2937;
+    --theme-blue-dark: #1E40AF;
+    --theme-red: #DC2626;
+}
 
-  .btn {
-      @apply px-4 py-2 rounded-lg font-medium text-sm transition duration-200;
-  }
+.btn-primary {
+    @apply bg-theme-blue text-theme-white px-6 py-3 rounded-lg hover:bg-theme-blue-dark focus:ring-2 focus:ring-theme-blue focus:ring-offset-2 transition duration-200 font-medium;
+}
 
-  .btn-secondary {
-      @apply bg-gray-200 text-theme-black hover:bg-gray-300 focus:ring-2 focus:ring-gray-400;
-  }
+.btn {
+    @apply px-4 py-2 rounded-lg font-medium text-sm transition duration-200;
+}
 
-  .btn-danger {
-      @apply bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500;
-  }
+.btn-secondary {
+    @apply bg-gray-200 text-theme-black hover:bg-gray-300 focus:ring-2 focus:ring-gray-400;
+}
 
-  .custom-checkbox {
-      @apply h-6 w-6 border-2 border-theme-black rounded-md cursor-pointer transition-all duration-200;
-      appearance: none;
-      background-color: #fff;
-  }
+.btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500;
+}
 
-  .custom-checkbox:hover {
-      @apply border-theme-blue;
-  }
+.btn-gradient {
+    @apply bg-gradient-to-r from-theme-blue to-theme-blue-dark text-theme-white px-6 py-3 rounded-lg hover:scale-105  focus:ring-2 focus:ring-theme-blue focus:ring-offset-2 transition-all duration-300 font-bold;
+}
 
-  .custom-checkbox:checked {
-      @apply bg-theme-blue border-theme-blue;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white' class='h-4 w-4'%3e%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd' /%3e%3C/svg%3e");
-      background-size: 16px;
-      background-position: center;
-      background-repeat: no-repeat;
-  }
+.action-btn {
+    @apply flex items-center px-3 py-2 rounded-full font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-105;
+}
 
-  @keyframes fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
-  }
+.table-row {
+    @apply shadow-sm hover:shadow-xl transition-all duration-300;
+}
 
-  .animate-fade-in {
-      animation: fade-in 0.5s ease-out;
-  }
+.custom-checkbox {
+    @apply h-6 w-6 border-2 border-theme-black rounded-md cursor-pointer transition-all duration-200;
+    appearance: none;
+    background-color: #fff;
+    flex-shrink: 0;
+}
+
+.custom-checkbox:hover {
+    @apply border-theme-blue;
+}
+
+.custom-checkbox:checked {
+    @apply bg-theme-blue border-theme-blue;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white' class='h-4 w-4'%3e%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd' /%3e%3C/svg%3e");
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.sidebar-menu-button {
+    @apply flex items-center gap-2 px-4 py-2 text-theme-black hover:bg-theme-blue/10 hover:text-theme-blue transition duration-200 rounded-md;
+}
+
+.sidebar-menu-button svg {
+    @apply w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-theme-black group-hover:text-theme-blue;
+}
+
+.sidebar-menu-button.active {
+    @apply bg-theme-blue text-theme-white;
+}
+
+.sidebar-menu-button.active svg {
+    @apply text-theme-white;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+}
+
+@media (max-width: 640px) {
+    table {
+        font-size: 14px;
+    }
+
+    .action-btn {
+        @apply px-2 py-1 text-xs;
+    }
+
+    .action-btn i {
+        @apply text-sm;
+    }
+}

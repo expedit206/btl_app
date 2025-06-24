@@ -16,6 +16,7 @@ const successMessage = page.props.flash?.success;
 </script>
 
 <template>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <AppSidebarLayout :breadcrumbs="breadcrumbs">
         <!-- Notification -->
         <div v-if="successMessage"
@@ -26,4 +27,18 @@ const successMessage = page.props.flash?.success;
         <!-- Contenu principal -->
         <slot />
     </AppSidebarLayout>
-</template>
+</template>  
+        
+                         
+                               
+                                         
+                                         
+                                               
+                                 
+                                   
+                                      
+                                   
+                                        
+                                           
+                                         
+                                                                 

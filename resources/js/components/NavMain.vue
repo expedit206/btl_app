@@ -12,13 +12,13 @@ const page = usePage<SharedData>();
 
 <template>
     <SidebarGroup class="px-2 py-0">
-        <SidebarGroupLabel>BTL Group</SidebarGroupLabel>
+        <SidebarGroupLabel class="text-white">BTL Group</SidebarGroupLabel>
         <SidebarMenu>
             <SidebarMenuItem v-for="item in items" :key="item.title">
-                <SidebarMenuButton as-child :is-active="item.href === page.url">
-                    <Link :href="item.href">
-                        <component :is="item.icon" />
-                        <span>{{ item.title }}</span>
+                <SidebarMenuButton as-child :is-active="item.href === page.url" class="b-t-3     border-black">
+                    <Link :href="item.href" class="text-white">
+                        <component :is="item.icon" class='text-white' />
+                        <span class="text-white">{{ item.title }}</span>
                     </Link>
                 </SidebarMenuButton>
             </SidebarMenuItem>

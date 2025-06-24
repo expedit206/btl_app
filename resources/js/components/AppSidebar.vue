@@ -61,27 +61,31 @@ const footerNavItems: NavItem[] = [
 </script>
 
 <template>
-    <Sidebar collapsible="icon" variant="inset">
-        <SidebarHeader>
-            <SidebarMenu>
-                <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
-                        <Link :href="route('dashboard')">
-                        <AppLogo />
-                        </Link>
-                    </SidebarMenuButton>
-                </SidebarMenuItem>
-            </SidebarMenu>
-        </SidebarHeader>
+    <div class="flex min-h-screen bg-blue-500">
+        <Sidebar collapsible="icon" variant="inset" class="bg-theme-white text-theme-black">
+            <SidebarHeader class="border-b border-theme-black/10">
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton size="lg" as-child class="hover:bg-theme-blue/10">
+                            <Link :href="route('dashboard')" class="text-white">
+                            <AppLogo class="w-10 h-10 lg:w-12 lg:h-12 text-theme-blue" />
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarHeader>
 
-        <SidebarContent>
-            <NavMain :items="mainNavItems" />
-        </SidebarContent>
+            <SidebarContent>
+                <NavMain :items="mainNavItems" />
+            </SidebarContent>
 
-        <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
-            <NavUser />
-        </SidebarFooter>
-    </Sidebar>
-    <slot />
+            <SidebarFooter class="border-t border-theme-black/10">
+                <NavFooter :items="footerNavItems" />
+                <NavUser />
+            </SidebarFooter>
+        </Sidebar>
+        <main class="flex-1">
+            <slot />
+        </main>
+    </div>
 </template>

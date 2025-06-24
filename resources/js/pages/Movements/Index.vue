@@ -43,7 +43,7 @@ const net = computed(() => totalEntries.value - totalExits.value);
 
 // Fonction pour exporter en CSV
 const exportToCSV = () => {
-    const headers = ['ID', 'Type', 'Catégorie', 'Quantité', 'Valeur (€)', 'Date', 'Description'];
+    const headers = ['ID', 'Type', 'Catégorie', 'Quantité', 'Valeur (FCFA)', 'Date', 'Description'];
     const rows = props.movements.map((m) => [
         m.id,
         m.type === 'entry' ? 'Entrée' : 'Sortie',
@@ -80,65 +80,74 @@ const confirmDelete = (movementId: number) => {
     <Head title="Mouvements" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Mouvements</h1>
+        <div class="p-4 sm:p-6 lg:p-8 bg-theme-white max-w-7xl mx-auto animate-fade-in-up min-h-screen">
+            <h1
+                class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-theme-black mb-6 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-1.5 after:bg-gradient-to-r after:from-theme-blue after:to-theme-blue-dark after:transition-all after:duration-500 hover:after:w-1/3">
+                Mouvements
+            </h1>
 
             <!-- Formulaire de filtrage -->
             <form @submit.prevent="form.get(route('movements.index'), { preserveState: true })"
-                class="mb-6 flex flex-col sm:flex-row gap-4 bg-white p-4 sm:p-6 rounded-lg shadow-sm">
-                <div class="flex-1">
-                    <label class="block text-sm font-medium text-gray-700">Date de début</label>
-                    <input v-model="form.date_from" type="date"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm" />
+                class="mb-6 flex flex-col sm:flex-row gap-4 bg-theme-white p-4 sm:p-6 rounded-lg shadow-md">
+                <div class="flex-1 relative">
+                    <label for="date_from"
+                        class="absolute -top-3 left-3 bg-theme-white px-1 text-sm sm:text-base font-bold text-theme-black transition-all">Date
+                        de début</label>
+                    <input v-model="form.date_from" id="date_from" type="date"
+                        class="block w-full rounded-lg border-2 border-theme-black/20 shadow-md focus:border-theme-blue focus:ring-2 focus:ring-theme-blue text-sm sm:text-base lg:text-lg p-3 transition-all duration-300" />
                 </div>
-                <div class="flex-1">
-                    <label class="block text-sm font-medium text-gray-700">Date de fin</label>
-                    <input v-model="form.date_to" type="date"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm" />
+                <div class="flex-1 relative">
+                    <label for="date_to"
+                        class="absolute -top-3 left-3 bg-theme-white px-1 text-sm sm:text-base font-bold text-theme-black transition-all">Date
+                        de fin</label>
+                    <input v-model="form.date_to" id="date_to" type="date"
+                        class="block w-full rounded-lg border-2 border-theme-black/20 shadow-md focus:border-theme-blue focus:ring-2 focus:ring-theme-blue text-sm sm:text-base lg:text-lg p-3 transition-all duration-300" />
                 </div>
-                <div class="flex-1">
-                    <label class="block text-sm font-medium text-gray-700">Type</label>
-                    <select v-model="form.type"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
+                <div class="flex-1 relative">
+                    <label for="type"
+                        class="absolute -top-3 left-3 bg-theme-white px-1 text-sm sm:text-base font-bold text-theme-black transition-all">Type</label>
+                    <select v-model="form.type" id="type"
+                        class="block w-full rounded-lg border-2 border-theme-black/20 shadow-md focus:border-theme-blue focus:ring-2 focus:ring-theme-blue text-sm sm:text-base lg:text-lg p-3 transition-all duration-300">
                         <option value="">Tous</option>
                         <option value="entry">Entrée</option>
                         <option value="exit">Sortie</option>
                     </select>
                 </div>
-                <button type="submit"
-                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200 text-sm self-end">
-                    Filtrer
+                <button type="submit" class="btn-gradient text-sm sm:text-base font-bold self-end">
+                    <i class="fa-solid fa-filter fa-sm sm:fa-md mr-2"></i> Filtrer
                 </button>
             </form>
 
             <!-- Boutons d'action -->
             <div class="flex flex-col sm:flex-row gap-4 mb-6">
-                <Link :href="route('movements.create')"
-                    class="inline-block px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600 transition duration-200 text-sm">
-                Ajouter un mouvement
+                <Link :href="route('movements.create')" class="btn-gradient text-sm sm:text-base font-bold">
+                <i class="fa-solid fa-plus fa-sm sm:fa-md mr-2"></i> Ajouter un mouvement
                 </Link>
-                <button @click="exportToCSV"
-                    class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200 text-sm">
-                    Exporter en CSV
+                <button @click="exportToCSV" class="btn-gradient text-sm sm:text-base font-bold">
+                    <i class="fa-solid fa-file-export fa-sm sm:fa-md mr-2"></i> Exporter en CSV
                 </button>
             </div>
 
             <!-- Bilan financier -->
             <div class="mb-6">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Résumé financier</h2>
+                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-theme-black mb-4">Résumé financier</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-200">
-                        <h3 class="text-base sm:text-lg font-medium text-gray-700">Total des entrées</h3>
-                        <p class="text-xl sm:text-2xl text-indigo-600">{{ totalEntries.toFixed(2) }} €</p>
+                    <div
+                        class="bg-gradient-to-r from-theme-blue to-theme-blue-dark p-4 rounded-lg shadow-lg hover:scale-105 transition-all duration-300">
+                        <h3 class="text-base sm:text-lg lg:text-xl font-bold text-theme-white">Total des entrées</h3>
+                        <p class="text-lg sm:text-xl lg:text-2xl text-theme-blue/100">{{ totalEntries.toFixed(2) }} FCFA
+                        </p>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-200">
-                        <h3 class="text-base sm:text-lg font-medium text-gray-700">Total des sorties</h3>
-                        <p class="text-xl sm:text-2xl text-red-600">{{ totalExits.toFixed(2) }} €</p>
+                    <div
+                        class="bg-gradient-to-r from-theme-red to-red-700 p-4 rounded-lg shadow-lg shadow-black/50 hover:scale-105 transition-all duration-300">
+                        <h3 class="text-base sm:text-lg lg:text-xl font-bold text-theme-black   ">Total des sorties</h3>
+                        <p class="text-lg sm:text-xl lg:text-2xl text-theme-black">{{ totalExits.toFixed(2) }} FCFA</p>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-200">
-                        <h3 class="text-base sm:text-lg font-medium text-gray-700">Solde net</h3>
-                        <p class="text-xl sm:text-2xl" :class="net >= 0 ? 'text-green-600' : 'text-red-600'">
-                            {{ net.toFixed(2) }} €
+                    <div
+                        class="bg-gradient-to-r from-theme-black to-gray-800 p-4 rounded-lg shadow-lg hover:scale-105 transition-all duration-300">
+                        <h3 class="text-base sm:text-lg lg:text-xl font-bold text-theme-white">Solde net</h3>
+                        <p class="text-lg sm:text-xl lg:text-2xl" :class="net >= 0 ? 'text-green-400' : 'text-red-400'">
+                            {{ net.toFixed(2) }} FCFA
                         </p>
                     </div>
                 </div>
@@ -146,44 +155,64 @@ const confirmDelete = (movementId: number) => {
 
             <!-- Liste des mouvements (tableau pour desktop) -->
             <div class="hidden sm:block overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow-md">
-                    <thead class="bg-gray-100">
+                <table class="min-w-full border-2 border-theme-black/60 rounded-lg shadow-lg">
+                    <thead class="bg-theme-blue/10">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Type</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Catégorie</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Quantité</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Valeur</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Date</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Actions</th>
+                            <th
+                                class="px-4 sm:px-6 py-4 text-left text-sm sm:text-base font-semibold text-theme-black uppercase tracking-wider">
+                                Type
+                            </th>
+                            <th
+                                class="px-4 sm:px-6 py-4 text-left text-sm sm:text-base font-semibold text-theme-black uppercase tracking-wider">
+                                Catégorie
+                            </th>
+                            <th
+                                class="px-4 sm:px-6 py-4 text-left text-sm sm:text-base font-semibold text-theme-black uppercase tracking-wider">
+                                Quantité
+                            </th>
+                            <th
+                                class="px-4 sm:px-6 py-4 text-left text-sm sm:text-base font-semibold text-theme-black uppercase tracking-wider">
+                                Valeur
+                            </th>
+                            <th
+                                class="px-4 sm:px-6 py-4 text-left text-sm sm:text-base font-semibold text-theme-black uppercase tracking-wider">
+                                Date
+                            </th>
+                            <th
+                                class="px-4 sm:px-6 py-4 text-left text-sm sm:text-base font-semibold text-theme-black uppercase tracking-wider">
+                                Actions
+                            </th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr v-for="movement in movements" :key="movement.id"
-                            class="hover:bg-gray-50 transition duration-150">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                <span :class="movement.type === 'entry' ? 'text-green-600' : 'text-red-600'">
+                    <tbody class="divide-y divide-theme-black/20">
+                        <tr v-for="(movement, index) in movements" :key="movement.id" class="table-row"
+                            :class="{ 'bg-theme-blue/5': index % 2 }">
+                            <td
+                                class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm sm:text-base lg:text-lg font-semibold text-theme-blue-dark">
+                                <span :class="movement.type === 'entry' ? 'text-green-600' : 'text-[--theme-red]'">
                                     {{ movement.type === 'entry' ? 'Entrée' : 'Sortie' }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ movement.category.name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ Number(movement.quantity).toFixed(2) }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ Number(movement.value).toFixed(2) }} €
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ movement.date }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <td
+                                class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm sm:text-base lg:text-lg font-semibold text-theme-blue-dark">
+                                {{ movement.category.name }}</td>
+                            <td
+                                class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm sm:text-base lg:text-lg font-semibold text-theme-blue-dark">
+                                {{ Number(movement.quantity).toFixed(2) }}</td>
+                            <td
+                                class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm sm:text-base lg:text-lg font-semibold text-theme-blue-dark">
+                                {{ Number(movement.value).toFixed(2) }} FCFA</td>
+                            <td
+                                class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm sm:text-base lg:text-lg font-semibold text-theme-blue-dark">
+                                {{ movement.date }}</td>
+                            <td class="px-4 sm:px-6 py-4 whitespace-nowrap flex items-center gap-3">
                                 <Link :href="route('movements.edit', movement.id)"
-                                    class="text-indigo-600 hover:text-indigo-900 mr-2">
-                                Modifier
+                                    class="action-btn bg-theme-blue/10 hover:bg-theme-blue text-theme-blue hover:text-theme-white text-sm sm:text-base">
+                                <i class="fa-solid fa-edit fa-sm sm:fa-sm mr-1"></i> Modifier
                                 </Link>
-                                <button @click="confirmDelete(movement.id)" class="text-red-600 hover:text-red-900">
-                                    Supprimer
+                                <button @click="confirmDelete(movement.id)"
+                                    class="action-btn bg-theme-red/10 hover:bg-theme-red text-[--theme-red] hover:text-theme-white text-sm sm:text-base">
+                                    <i class="fa-solid fa-trash fa-sm sm:fa-sm mr-1"></i> Supprimer
                                 </button>
                             </td>
                         </tr>
@@ -193,25 +222,30 @@ const confirmDelete = (movementId: number) => {
 
             <!-- Liste des mouvements (cartes pour mobile) -->
             <div class="block sm:hidden space-y-4">
-                <div v-for="movement in movements" :key="movement.id"
-                    class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-200">
+                <div v-for="(movement, index) in movements" :key="movement.id"
+                    class="bg-theme-white p-4 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+                    :class="{ 'bg-theme-blue/5': index % 2 }">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm font-medium"
-                            :class="movement.type === 'entry' ? 'text-green-600' : 'text-red-600'">
+                        <span class="text-sm sm:text-base font-semibold"
+                            :class="movement.type === 'entry' ? 'text-green-600' : 'text-[--theme-red]'">
                             {{ movement.type === 'entry' ? 'Entrée' : 'Sortie' }}
                         </span>
-                        <span class="text-xs text-gray-500">{{ movement.date }}</span>
+                        <span class="text-xs sm:text-sm text-theme-black">{{ movement.date }}</span>
                     </div>
-                    <p class="text-sm text-gray-700">Catégorie: {{ movement.category.name }}</p>
-                    <p class="text-sm text-gray-700">Quantité: {{ Number(movement.quantity).toFixed(2) }}</p>
-                    <p class="text-sm text-gray-700">Valeur: {{ Number(movement.value).toFixed(2) }} €</p>
-                    <div class="mt-2">
+                    <p class="text-sm sm:text-base text-theme-black font-semibold">Catégorie: {{ movement.category.name
+                        }}</p>
+                    <p class="text-sm sm:text-base text-theme-black font-semibold">Quantité: {{
+                        Number(movement.quantity).toFixed(2) }}</p>
+                    <p class="text-sm sm:text-base text-theme-black font-semibold">Valeur: {{
+                        Number(movement.value).toFixed(2) }} FCFA</p>
+                    <div class="mt-2 flex gap-2">
                         <Link :href="route('movements.edit', movement.id)"
-                            class="text-indigo-600 hover:text-indigo-900 text-sm mr-2">
-                        Modifier
+                            class="action-btn bg-theme-blue/10 hover:bg-theme-blue text-theme-blue hover:text-theme-white text-xs sm:text-sm">
+                        <i class="fa-solid fa-edit fa-xs sm:fa-sm mr-1"></i> Modifier
                         </Link>
-                        <button @click="confirmDelete(movement.id)" class="text-red-600 hover:text-red-900 text-sm">
-                            Supprimer
+                        <button @click="confirmDelete(movement.id)"
+                            class="action-btn bg-theme-red/10 hover:bg-theme-red text-[--theme-red] hover:text-theme-white text-xs sm:text-sm">
+                            <i class="fa-solid fa-trash fa-xs sm:fa-sm mr-1"></i> Supprimer
                         </button>
                     </div>
                 </div>
